@@ -1,0 +1,30 @@
+class Solution {
+public:
+    public:
+    string toGoatLatin(string S) {
+        int i = 0, index = 1;
+        string ans;
+        S += " ";
+        while (i < S.length()) {
+            int j = (int) S.find(" ", i);
+            if (j > i) {
+                string str = S.substr(i, j - i);
+                char lc = (char) (str[0] | 32);
+                if (lc == 'a' || lc == 'e' || lc == 'i' || lc == 'o' || lc == 'u') {
+                    ans.append(str + "ma");
+                } else {
+                    ans.append(str.substr(1) + str[0] + "ma");
+                }
+                for (int k = 0; k < index; k++)
+                    ans.append("a");
+                ans.append(" ");
+                index++;
+            }
+
+            while (j < S.length() && S[j] == ' ')
+                j++;
+            i = j;
+        }
+        return ans.substr(0, ans.find_last_of(" "));
+    }
+};
